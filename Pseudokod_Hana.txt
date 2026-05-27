@@ -1,0 +1,30 @@
+START
+
+Create player Dictionary
+Create enemy Dictionary
+Create inventory list
+
+WHILE player health is greather than 0
+
+    Show combat options
+
+    IF player chooses attack
+        Reduce enemy health
+
+    ELSE IF player chooses heal
+        Use potion and restore health
+
+    ELSE IF player chooses inventory
+        Show inventory
+
+    IF enemy health is 0
+        Print victory message
+        End combat
+    
+    IF player health is 0
+        Print game over message
+        End combat
+
+END WHILE
+
+END
