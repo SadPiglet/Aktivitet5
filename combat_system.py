@@ -44,7 +44,19 @@ enemies = [
 
 ]
 
-inventory = ["Potion", "Sword"]
+boss = {
+    "name": "Goose",
+    "level": 5,
+    "exp": 500,
+    "health": 300,
+    "damage": 30
+}
+
+
+inventory = {
+            "Potion": 2, 
+            "Gold" : 100
+            }
 
 def attack(attacker, target):
     target["health"] -= attacker["damage"]
@@ -54,13 +66,14 @@ def attack(attacker, target):
 
 
 def heal(player, inventory):
-    if "Potion" in inventory:
+    if "Potion" in inventory and inventory["Potion"] > 0:
+
         player["health"] += 25
         
         if player["health"] > player["max_health"]:
             player["health"] = player["max_health"]
 
-        #inventory.remove("Potion")  # Uncomment this line to consume the potion
+        inventory["Potion"] -= 1
 
         print(player["name"] + " uses a Potion and heals 25 health!")
         print(player["name"] + " now has " + str(player["health"]) + " health.")
@@ -126,3 +139,17 @@ while player["health"] > 0:
             print("\n" + enemy["name"] + " has been defeated! You win!")
 
             gain_exp(player, enemy["exp"])
+
+            loot = random.choice(["Gold", "Gold", "Gold", "Potion", "Nothing"])
+            
+            print("You found a " + loot + " on the " + enemy["name"] + "!")
+
+            if loot != "Nothing":
+                
+                if loot in inventory:
+                    inventory[loot] += 1
+
+                else:
+                    inventory[loot] = 1
+
+            print("Inventory:", inventory)
