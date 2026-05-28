@@ -102,6 +102,7 @@ def level_up(player):
     print(player["name"] + " leveled up to level " + str(player["level"]) + "!")
     print("Health increased to " + str(player["health"]) + " and damage increased to " + str(player["damage"]) + ".")
 
+
 while player["health"] > 0:
 
     enemy = random.choice(enemies).copy()
@@ -139,6 +140,46 @@ while player["health"] > 0:
             print("\n" + enemy["name"] + " has been defeated! You win!")
 
             gain_exp(player, enemy["exp"])
+
+            if player["level"] == 10:
+                print("A boss appears! It's " + boss["name"] + "!")
+
+                boss = boss.copy()
+
+                while boss["health"] > 0 and player["health"] > 0:
+
+                    print("\nWhat will you do?")
+                    print("1. Attack")
+                    print("2. Heal")
+                    print("3. Show inventory")
+
+                    choice = input("Choose an action: ")
+
+                    if choice == "1":
+                        attack(player, boss)
+
+                    elif choice == "2":
+                        heal(player, inventory)
+
+                    elif choice == "3":
+                        print("Inventory:", inventory)
+
+                    else:
+                        print("Invalid choice. Please try again.")
+
+                    if boss["health"] > 0:
+                        attack(boss, player)
+
+                if boss["health"] <= 0:
+                    print("\n" + boss["name"] + " has been defeated! You win the game!")
+                    exit()
+
+                else:
+                    print("\n" + player["name"] + " has been defeated by the boss! Game Over.")
+                    exit()
+                
+                break
+                
 
             loot = random.choice(["Gold", "Gold", "Gold", "Potion", "Nothing"])
             
